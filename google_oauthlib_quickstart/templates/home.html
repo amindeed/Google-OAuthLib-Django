@@ -1,0 +1,25 @@
+{% if user %}
+
+<div style="word-wrap:break-word; padding: 0  0 40px 0;">
+    <strong>Messages: </strong><br /><br />
+    {{ messages }}
+</div>
+
+<div style="word-wrap:break-word; padding: 0  0 40px 0;">
+    <strong>User Info: </strong><br /><br />
+    {{ user }}
+</div>
+
+<div style="word-wrap:break-word; padding: 0  0 40px 0;">
+    <strong>API call return value: </strong><br /><br />
+    {{ api_call_return_value }}
+</div>
+
+<hr>
+<a href="/logout/">logout</a>
+
+{% else %}
+
+<a href="/login/">login</a>
+
+{% endif %}
