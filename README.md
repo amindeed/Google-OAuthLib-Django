@@ -1,6 +1,12 @@
 # Google OAuthLib Django
 
-Sample Django project using [`google-auth-oauthlib`](https://github.com/googleapis/google-auth-library-python-oauthlib) for OAuth2 authentication.
+Sample Django project using [`google-auth-oauthlib`](https://github.com/googleapis/google-auth-library-python-oauthlib) for OAuth2 authentication. 
+
+This is not intended as a replacement for Django's users sign up/in mechanism. [Django AllAuth](https://github.com/pennersr/django-allauth) is more suited for such use case. 
+
+**Google OAuthLib Django** uses basic [Django Sessions](https://docs.djangoproject.com/en/3.1/topics/http/sessions/#using-sessions-in-views) to let users make authenticated requests that target their Google accounts resources. No user data is kept after logout.
+
+*Tested with `Python 3.9.1`, `Django 3.1.5`, `Google API Python Client 1.12.8` and `Google Auth OAuthLib 0.4.2`, as of February 26, 2021.*
 
 <br /><img src="/google-oauthlib-django.gif" alt="google-oauthlib-django.gif" width="500"/><br />
 
@@ -18,19 +24,28 @@ The structure of the code was built upon the [AuthLib library demo for Django](h
     - [`Flow`](https://google-auth-oauthlib.readthedocs.io/en/latest/reference/google_auth_oauthlib.flow.html#google_auth_oauthlib.flow.Flow) class was used instead of [`InstalledAppFlow`](https://google-auth-oauthlib.readthedocs.io/en/latest/reference/google_auth_oauthlib.flow.html#google_auth_oauthlib.flow.InstalledAppFlow).
     - Instead of using pickles, OAuth2 token (a [`Credentials`](https://google-auth.readthedocs.io/en/stable/reference/google.oauth2.credentials.html#google.oauth2.credentials.Credentials) instance) is converted to a dictionary and saved to the session (as a session key named `token`).
     - Value of session key `user` (which identifies the logged in user) is retrieved by [parsing](https://google-auth.readthedocs.io/en/stable/reference/google.oauth2.id_token.html#google.oauth2.id_token.verify_oauth2_token) the [Open ID Connect ID Token](https://google-auth.readthedocs.io/en/stable/reference/google.oauth2.credentials.html#google.oauth2.credentials.Credentials.id_token) contained in the Credentials object resulting from a complete and successful OAuth2 flow.
+    - **Key online resources:**
+        - [`Flow` class of the `google_auth_oauthlib.flow` module](https://google-auth-oauthlib.readthedocs.io/en/latest/reference/google_auth_oauthlib.flow.html) (google-auth-oauthlib 0.4.1 documentation)
+            - [`Flow.fetch_token(code=code)`](https://google-auth-oauthlib.readthedocs.io/en/latest/reference/google_auth_oauthlib.flow.html#google_auth_oauthlib.flow.Flow.fetch_token)
+            - [`Flow.credentials`](https://google-auth-oauthlib.readthedocs.io/en/latest/reference/google_auth_oauthlib.flow.html#google_auth_oauthlib.flow.Flow.credentials)
+                - Constructs a [`google.oauth2.credentials.Credentials`](https://google-auth.readthedocs.io/en/stable/reference/google.oauth2.credentials.html#google.oauth2.credentials.Credentials) class.
+                    - _..which is a child class of [`google.auth.credentials.Credentials`](https://google-auth.readthedocs.io/en/stable/reference/google.auth.credentials.html#google.auth.credentials.Credentials)_
+                    - [`to_json()`](https://google-auth.readthedocs.io/en/stable/reference/google.oauth2.credentials.html#google.oauth2.credentials.Credentials.to_json): Returns A JSON representation of this instance. When converted into a dictionary, it can be passed to [`from_authorized_user_info()`](https://google-auth.readthedocs.io/en/stable/reference/google.oauth2.credentials.html#google.oauth2.credentials.Credentials.from_authorized_user_info) to create a new Credentials instance.
+                    - [`id_token`](https://google-auth.readthedocs.io/en/stable/reference/google.oauth2.credentials.html#google.oauth2.credentials.Credentials.id_token): can be verified and decoded (parsed) using [`google.oauth2.id_token.verify_oauth2_token()`](https://google-auth.readthedocs.io/en/stable/reference/google.oauth2.id_token.html#google.oauth2.id_token.verify_oauth2_token)
 
-- Added a few features:
+- Added a few features/enhancements:
     - Handling backend errors, warnings and infos, and storing their respective messages to the session key `messages`, which is added as a variable to template's context, and then rendered on the frontend.
     - Handling access to some special paths like `/login` and `/auth` (no `404` catch-all page, though).
+    - logout view function, that clears browser cookies along with the corresponding session from Django's database.
 
 ## Setup
 
-_Tested and run on Windows 10 x64, with `Python 3.9.1`:_
+_Tested and run on Windows 10 x64:_
 
 - Create a GCP project, enable Drive API, add the following scopes and then download webapp Client ID credentials file from the GCP console:
 
     ```
-    'https://www.googleapis.com/auth/drive', \
+    'https://www.googleapis.com/auth/drive.metadata.readonly', \
     'https://www.googleapis.com/auth/userinfo.email', \
     'https://www.googleapis.com/auth/userinfo.profile', \
     'openid'
