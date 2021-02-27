@@ -10,6 +10,10 @@ This is not intended as a replacement for Django's users sign up/in mechanism. [
 
 <br /><img src="/google-oauthlib-django.gif" alt="google-oauthlib-django.gif" width="500"/><br />
 
+## Background
+
+The code in this repository was a result of my researches for another project: [`GMail-AutoResponder`](https://github.com/amindeed/Gmail-AutoResponder/blob/master/worklog.md#2021-02-15-code).
+
 The structure of the code was built upon the [AuthLib library demo for Django](https://github.com/authlib/demo-oauth-client/tree/310c6f1da26abc32f8eca8668d1b6d0aa4a9f0a3/django-google-login) and the [Google Apps Script API Python Quickstart](https://github.com/googleworkspace/python-samples/tree/aacc00657392a7119808b989167130b664be5c27/apps_script/quickstart) (and later, the [Drive V3 Python Quickstart](https://github.com/googleworkspace/python-samples/tree/master/drive/quickstart), for simpler API calls):
 
 - **[AuthLib](https://github.com/lepture/authlib)** would have been my goto library, but I dropped it after many tries, due to confusing instructions about OAuth2 refresh token support for Django _(at least, up until February 2021)_:
@@ -69,10 +73,6 @@ _Tested and run on Windows 10 x64:_
     python manage.py migrate
     python manage.py runserver
     ```
-
-## Background
-
-The code in this repository was a result of my researches for another project: [`GMail-AutoResponder`](https://github.com/amindeed/Gmail-AutoResponder/blob/master/worklog.md#2021-02-15-code).
 
 ## License
 
