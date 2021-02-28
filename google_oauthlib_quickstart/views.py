@@ -9,7 +9,12 @@ from google.oauth2 import id_token
 from google.oauth2.credentials import Credentials
 from django.contrib.auth import logout
 
-SCOPES = ['https://www.googleapis.com/auth/drive.metadata.readonly', 'https://www.googleapis.com/auth/userinfo.email', 'https://www.googleapis.com/auth/userinfo.profile', 'openid']
+SCOPES = [
+    'https://www.googleapis.com/auth/drive.metadata.readonly', 
+    'https://www.googleapis.com/auth/userinfo.email', 
+    'https://www.googleapis.com/auth/userinfo.profile', 
+    'openid'
+    ]
 
 REDIRECT_URI = 'http://127.0.0.1:8000/auth/'
 
@@ -21,19 +26,14 @@ flow = Flow.from_client_secrets_file(
     redirect_uri = REDIRECT_URI)
 
 
-def home(request):
-    # Retrieve User Info and access token, if any, from session
-    user = request.session.get('user')
-    access_token = request.session.get('token')
+# @require_auth decorator
+def require_auth(function):
+    def wrapper(request, *args, **kwargs):
+        user = request.session.get('user')
+        access_token = request.session.get('token')
 
-    messages = request.session.get('messages', {})
-    creds = None
-    api_call_return_value = {}
-
-    # If there is an active user session (i.e. a user is logged in)
-    if user:
-        
-        if access_token:
+        # If there is an active user session (i.e. a user is logged in)
+        if user and access_token:
             # Creates a Credentials (google.auth.credentials.Credentials) 
             # instance from parsed authorized user info stored in the 
             # session key 'token'.
@@ -42,35 +42,53 @@ def home(request):
             # builder (googleapiclient.discovery.build).
             creds = Credentials.from_authorized_user_info(access_token)
 
-        # Validate user's credentials (access token)
-        if not creds or not creds.valid:
-            if creds and creds.expired and creds.refresh_token:
-                creds.refresh(Request())
-                # Store refreshed access token in session
-                request.session['token'] = json.loads(creds.to_json())
+            # Validate user's credentials (access token)
+            if not creds or not creds.valid:
+                if creds and creds.expired and creds.refresh_token:
+                    creds.refresh(Request())
+                    # Store refreshed access token in session
+                    request.session['token'] = json.loads(creds.to_json())
+                    # return the wrapped function
+                    return function(request, *args, **kwargs)
+                else:
+                    # If in doubt, just logout to clear session and cookies.
+                    logout(request)
+                    return redirect('/login')
             else:
-                # If in doubt, just logout to clear session and cookies.
-                logout(request)
-                return render(request, 'home.html')
+                return function(request, *args, **kwargs)
+        else:
+            logout(request)
+            return redirect('/login')
+    return wrapper
 
-        # Construct a Resource to interact with the Drive API
-        service = build('drive', 'v3', credentials=creds)
+@require_auth
+def home(request):
+    # Retrieve User Info and access token, if any, from session
+    user = request.session.get('user')
+    access_token = request.session.get('token')
 
-        try:
-            # Make the API request.
-            response = service.files().list(pageSize=10, fields="nextPageToken, files(id, name)").execute()
+    messages = request.session.get('messages', {})
+    creds = creds = Credentials.from_authorized_user_info(access_token)
+    api_call_return_value = {}
 
-            if 'error' in response:
-                # The API executed, but Drive service returned an error.
-                api_call_error = response['error']['details'][0]
-                messages.setdefault('errors', []).append({'usr_msg': 'API Call error.', 'sys_msg': str(api_call_error['errorMessage'])})
+    # Construct a Resource to interact with the Drive API
+    service = build('drive', 'v3', credentials=creds)
 
-            else:
-                api_call_return_value = response['files']
+    try:
+        # Make the API request.
+        response = service.files().list(pageSize=10, fields="nextPageToken, files(id, name)").execute()
 
-        except errors.HttpError as e:
-            # The API encountered a problem before reaching Google Drive
-            messages.setdefault('errors', []).append({'usr_msg': 'API Call error.', 'sys_msg': e.content})
+        if 'error' in response:
+            # The API executed, but Drive service returned an error.
+            api_call_error = response['error']['details'][0]
+            messages.setdefault('errors', []).append({'usr_msg': 'API Call error.', 'sys_msg': str(api_call_error['errorMessage'])})
+
+        else:
+            api_call_return_value = response['files']
+
+    except errors.HttpError as e:
+        # The API encountered a problem before reaching Google Drive
+        messages.setdefault('errors', []).append({'usr_msg': 'API Call error.', 'sys_msg': e.content})
     
     # Store all messages into session; to be added to template's context object
     request.session['messages'] = messages

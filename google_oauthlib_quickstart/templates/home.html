@@ -1,5 +1,3 @@
-{% if user %}
-
 <div style="word-wrap:break-word; padding: 0  0 40px 0; color:blue;">
     <strong>Messages: </strong><br /><br />
     {{ messages }}
@@ -17,9 +15,3 @@
 
 <hr>
 <a href="/logout/">logout</a>
-
-{% else %}
-
-<a href="/login/">login</a>
-
-{% endif %}

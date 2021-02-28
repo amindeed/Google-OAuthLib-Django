@@ -12,7 +12,7 @@ This is not intended as a replacement for Django's users sign up/in mechanism. [
 
 ## Background
 
-The code in this repository was a result of my researches for another project: [`GMail-AutoResponder`](https://github.com/amindeed/Gmail-AutoResponder/blob/master/worklog.md#2021-02-15-code).
+_The code in this repository was a result of my researches for another project: [`GMail-AutoResponder`](https://github.com/amindeed/Gmail-AutoResponder/blob/master/worklog.md#2021-02-15-code)_.
 
 The structure of the code was built upon the [AuthLib library demo for Django](https://github.com/authlib/demo-oauth-client/tree/310c6f1da26abc32f8eca8668d1b6d0aa4a9f0a3/django-google-login) and the [Google Apps Script API Python Quickstart](https://github.com/googleworkspace/python-samples/tree/aacc00657392a7119808b989167130b664be5c27/apps_script/quickstart) (and later, the [Drive V3 Python Quickstart](https://github.com/googleworkspace/python-samples/tree/master/drive/quickstart), for simpler API calls):
 
@@ -41,6 +41,7 @@ The structure of the code was built upon the [AuthLib library demo for Django](h
     - Handling backend errors, warnings and infos, and storing their respective messages to the session key `messages`, which is added as a variable to template's context, and then rendered on the frontend.
     - Handling access to some special paths like `/login` and `/auth` (no `404` catch-all page, though).
     - logout view function, that clears browser cookies along with the corresponding session from Django's database.
+    - `@require_auth` decorator for views.
 
 ## Setup
 
