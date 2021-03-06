@@ -12,7 +12,7 @@ import requests
 import datetime # To generate timestamps
 
 SCOPES = [
-    'https://www.googleapis.com/auth/drive', 
+    'https://www.googleapis.com/auth/drive.metadata.readonly', 
     'https://www.googleapis.com/auth/userinfo.email', 
     'https://www.googleapis.com/auth/userinfo.profile', 
     'openid'
@@ -112,11 +112,12 @@ def home(request):
 
     try:
         hreq_bearer_auth_api_call_return = requests.post(hreq_url, headers=hreq_headers, json=hreq_payload)
+        hreq_bearer_auth_api_call_return.raise_for_status()
         hreq_bearer_auth_api_call_return = hreq_bearer_auth_api_call_return.json()
 
-    except Exception as e:
-        messages.setdefault('errors', []).append({'usr_msg': 'API Call (plain HTTP request with bearer authentication) error.', 'sys_msg': e.content})
-    
+    except requests.exceptions.RequestException as e:
+        messages.setdefault('errors', []).append({'usr_msg': 'API Call (plain HTTP request with bearer authentication) error.', 'sys_msg': e})
+
     # Store all messages into session; to be added to template's context object
     request.session['messages'] = messages
     session_messages = request.session.pop('messages', None)
