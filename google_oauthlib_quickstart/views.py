@@ -8,9 +8,11 @@ from google.auth.transport.requests import Request
 from google.oauth2 import id_token
 from google.oauth2.credentials import Credentials
 from django.contrib.auth import logout
+import requests
+import datetime # To generate timestamps
 
 SCOPES = [
-    'https://www.googleapis.com/auth/drive.metadata.readonly', 
+    'https://www.googleapis.com/auth/drive', 
     'https://www.googleapis.com/auth/userinfo.email', 
     'https://www.googleapis.com/auth/userinfo.profile', 
     'openid'
@@ -61,15 +63,18 @@ def require_auth(function):
             return redirect('/login')
     return wrapper
 
+
 @require_auth
 def home(request):
     # Retrieve User Info and access token, if any, from session
     user = request.session.get('user')
     access_token = request.session.get('token')
-
     messages = request.session.get('messages', {})
+
+    ## 1. Using Google API Client library ##
+
     creds = creds = Credentials.from_authorized_user_info(access_token)
-    api_call_return_value = {}
+    api_call_return = {}
 
     # Construct a Resource to interact with the Drive API
     service = build('drive', 'v3', credentials=creds)
@@ -84,17 +89,39 @@ def home(request):
             messages.setdefault('errors', []).append({'usr_msg': 'API Call error.', 'sys_msg': str(api_call_error['errorMessage'])})
 
         else:
-            api_call_return_value = response['files']
+            api_call_return = response['files']
 
     except errors.HttpError as e:
         # The API encountered a problem before reaching Google Drive
-        messages.setdefault('errors', []).append({'usr_msg': 'API Call error.', 'sys_msg': e.content})
+        messages.setdefault('errors', []).append({'usr_msg': 'HTTP request error.', 'sys_msg': e.content})
+
+    ## 2. Using plain HTTP requests with bearer authentication ##
+
+    bearer_auth_token = access_token['token']
+    hreq_bearer_auth_api_call_return = {}
+    hreq_url = 'https://www.googleapis.com/drive/v3/files?alt=json' # API endpoint
+    hreq_headers = {
+        'Authorization': 'Bearer ' + bearer_auth_token,
+        'Content-Type': 'application/json'
+        }
+    folder_name = datetime.datetime.now().strftime("[%Y-%m-%d %H-%M-%S] Auto-created")
+    hreq_payload = {
+        'mimeType':'application/vnd.google-apps.folder',
+        'name':folder_name
+        }
+
+    try:
+        hreq_bearer_auth_api_call_return = requests.post(hreq_url, headers=hreq_headers, json=hreq_payload)
+        hreq_bearer_auth_api_call_return = hreq_bearer_auth_api_call_return.json()
+
+    except Exception as e:
+        messages.setdefault('errors', []).append({'usr_msg': 'API Call (plain HTTP request with bearer authentication) error.', 'sys_msg': e.content})
     
     # Store all messages into session; to be added to template's context object
     request.session['messages'] = messages
     session_messages = request.session.pop('messages', None)
 
-    return render(request, 'home.html', context={'user': user, 'messages': session_messages, 'api_call_return_value': api_call_return_value})
+    return render(request, 'home.html', context={'user': user, 'messages': session_messages, 'api_call_return': api_call_return, 'hreq_bearer_auth_api_call_return': hreq_bearer_auth_api_call_return})
 
 
 def login(request):
@@ -155,6 +182,7 @@ def auth(request):
     request.session['messages'] = messages
 
     return redirect('/')
+
 
 # logout view: clears cookies from the browser 
 # and the corresponding session from Django's DB
