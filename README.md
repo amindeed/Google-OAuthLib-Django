@@ -66,7 +66,7 @@ The structure of the code was built upon the [AuthLib library demo for Django](h
 - [`Flow`](https://google-auth-oauthlib.readthedocs.io/en/latest/reference/google_auth_oauthlib.flow.html#google_auth_oauthlib.flow.Flow) class was used instead of [`InstalledAppFlow`](https://google-auth-oauthlib.readthedocs.io/en/latest/reference/google_auth_oauthlib.flow.html#google_auth_oauthlib.flow.InstalledAppFlow).
 - Instead of using pickles, OAuth2 token (a [`Credentials`](https://google-auth.readthedocs.io/en/stable/reference/google.oauth2.credentials.html#google.oauth2.credentials.Credentials) instance) is converted to a dictionary and saved to the session (as a session key named `token`):
 
-    ```json
+    ```
     {
         'token': 'XXXXXXXXX',
         'refresh_token': 'YYYYYYY',
@@ -85,7 +85,7 @@ The structure of the code was built upon the [AuthLib library demo for Django](h
 
 - Value of session key `user` (which identifies the logged in user) is retrieved by [parsing](https://google-auth.readthedocs.io/en/stable/reference/google.oauth2.id_token.html#google.oauth2.id_token.verify_oauth2_token) the [Open ID Connect ID Token](https://google-auth.readthedocs.io/en/stable/reference/google.oauth2.credentials.html#google.oauth2.credentials.Credentials.id_token) contained in the Credentials object resulting from a complete and successful OAuth2 flow.
 
-    ```json
+    ```
     {
         'iss': 'https://accounts.google.com',
         'azp': 'xxxxxxxxxxx.apps.googleusercontent.com',
@@ -122,7 +122,7 @@ _Tested and run on Windows 10 x64._
 - Create a GCP project, enable Drive API, add the following scopes and then download webapp Client ID credentials file from the GCP console:
 
     ```
-    'https://www.googleapis.com/auth/drive.metadata.readonly', \
+    'https://www.googleapis.com/auth/drive', \
     'https://www.googleapis.com/auth/userinfo.email', \
     'https://www.googleapis.com/auth/userinfo.profile', \
     'openid'
@@ -151,15 +151,15 @@ python manage.py runserver
 
 ### Option 2: Update an existing Django project/app
 
-Diffing changes between the code in this repository and a newly created Django project (`django-admin startproject django_app .`):
+Diffing changes between the code in this repository and a newly created Django project (`django-admin startproject my_django_app .`):
 
 - ➕ Add files:
     - **`credentials.json`** (GCP project Client ID credentials)
-    - **`google_oauthlib_quickstart/templates/home.html`** (sample base template)
-    - **`google_oauthlib_quickstart/views.py`**
+    - **`my_django_app/templates/home.html`** ( [`templates/home.html`](/google_oauthlib_quickstart/templates/home.html) sample base template)
+    - **`my_django_app/views.py`** ([`views.py`](/google_oauthlib_quickstart/views.py))
     - **`db.sqlite3`** (automatically created by Django by running `python manage.py migrate`)
 
-- Modify **`django_app/settings.py`**: Django admin site and static files apps are disabled. For middleware, only `SessionMiddleware` is kept, which is enough for the intended use case.
+- ✎ Modify **`my_django_app/settings.py`**: Django admin site and static files apps are disabled. For middleware, only `SessionMiddleware` is kept, which is enough for the intended use case.
 
     ```diff
     @@ -8,7 +8,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
@@ -182,7 +182,7 @@ Diffing changes between the code in this repository and a newly created Django p
         'django.contrib.messages',
     -    'django.contrib.staticfiles',
     +
-    +    'google_oauthlib_quickstart',
+    +    'my_django_app',
     ]
 
     MIDDLEWARE = [
@@ -196,12 +196,12 @@ Diffing changes between the code in this repository and a newly created Django p
     ]
     ```
 
-- Modify **`django_app/urls.py`**: All lines of code related to the Django admin site are removed.
+- ✎ Modify **`my_django_app/urls.py`**: All lines of code related to the Django admin site are removed.
 
     ```diff
     -from django.contrib import admin
     from django.urls import path
-    +from google_oauthlib_quickstart import views
+    +from my_django_app import views
 
     urlpatterns = [
     -    path('admin/', admin.site.urls),
