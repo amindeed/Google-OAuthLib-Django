@@ -18,12 +18,14 @@ This is not intended as a replacement for Django's users sign up/in mechanism. [
 
 - [Features](#features)
 - [Background](#background)
-    - [About AuthLib](#about-authlib)
-    - [Google AppsScript/Drive API Python Quickstart code adaptation:](#google-appsscriptdrive-api-python-quickstart-code-adaptation)
+  - [About AuthLib](#about-authlib)
+  - [Google AppsScript/Drive API Python Quickstart code adaptation:](#google-appsscriptdrive-api-python-quickstart-code-adaptation)
 - [Setup](#setup)
-    - [Install and configure requirements](#install-and-configure-requirements)
-    - [Option 1: Cloning and running the code from this repository](#option-1-cloning-and-running-the-code-from-this-repository)
-    - [Option 2: Update an existing Django project/app](#option-2-update-an-existing-django-projectapp)
+  - [Install and configure requirements](#install-and-configure-requirements)
+  - [Option 1: Cloning and running the code from this repository](#option-1-cloning-and-running-the-code-from-this-repository)
+  - [Option 2: Update an existing Django project/app](#option-2-update-an-existing-django-projectapp)
+    - _[Add files:](#-add-files)_
+    - _[Modify files:](#-modify-files)_
 - [License](#license)
 
 
@@ -153,13 +155,16 @@ python manage.py runserver
 
 Diffing changes between the code in this repository and a newly created Django project (`django-admin startproject my_django_app .`):
 
-- ➕ Add files:
-    - **`credentials.json`** (GCP project Client ID credentials)
-    - **`my_django_app/templates/home.html`** ( [`templates/home.html`](/google_oauthlib_quickstart/templates/home.html) sample base template)
-    - **`my_django_app/views.py`** ([`views.py`](/google_oauthlib_quickstart/views.py))
-    - **`db.sqlite3`** (automatically created by Django by running `python manage.py migrate`)
+#### ➕ Add files:
 
-- ✎ Modify **`my_django_app/settings.py`**: Django admin site and static files apps are disabled. For middleware, only `SessionMiddleware` is kept, which is enough for the intended use case.
+- **`credentials.json`** (GCP project Client ID credentials)
+- **`my_django_app/templates/home.html`** ( [`templates/home.html`](/google_oauthlib_quickstart/templates/home.html) sample base template)
+- **`my_django_app/views.py`** ([`views.py`](/google_oauthlib_quickstart/views.py))
+- **`db.sqlite3`** (automatically created by Django by running `python manage.py migrate`)
+
+#### ✎ Modify files:
+
+- Modify **`my_django_app/settings.py`**: Django admin site and static files apps are disabled. For middleware, only `SessionMiddleware` is kept, which is enough for the intended use case.
 
     ```diff
     @@ -8,7 +8,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
@@ -196,7 +201,7 @@ Diffing changes between the code in this repository and a newly created Django p
     ]
     ```
 
-- ✎ Modify **`my_django_app/urls.py`**: All lines of code related to the Django admin site are removed.
+- Modify **`my_django_app/urls.py`**: All lines of code related to the Django admin site are removed.
 
     ```diff
     -from django.contrib import admin
