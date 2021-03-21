@@ -6,11 +6,11 @@
 </p>
 
 
-Sample Django project using [`google-auth-oauthlib`](https://github.com/googleapis/google-auth-library-python-oauthlib) for OAuth2 authentication. 
+**Google OAuthLib Django** is a Django boilerplate app implementing a full Google OAuth2 authentication flow using [`google-auth-oauthlib`](https://github.com/googleapis/google-auth-library-python-oauthlib) with [Sessions](https://docs.djangoproject.com/en/3.1/topics/http/sessions/#using-sessions-in-views).
 
 This is not intended as a replacement for Django's users sign up/in mechanism. [Django AllAuth](https://github.com/pennersr/django-allauth) is more suited for such use case. 
 
-**Google OAuthLib Django** uses basic [Django Sessions](https://docs.djangoproject.com/en/3.1/topics/http/sessions/#using-sessions-in-views) to let users make authenticated requests that target their Google accounts resources. No user data is kept after logout.
+The App uses basic [Django Sessions](https://docs.djangoproject.com/en/3.1/topics/http/sessions/#using-sessions-in-views) to let users make authenticated requests that target their Google accounts resources. No user data is kept after logout.
 
 *Tested with `Python 3.9.1`, `Django 3.1.5`, `Google API Python Client 1.12.8` and `Google Auth OAuthLib 0.4.2`, as of February 26, 2021.*
 
