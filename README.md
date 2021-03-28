@@ -1,5 +1,12 @@
 # Google OAuthLib Django
 
+![Lines of code](https://img.shields.io/tokei/lines/github/amindeed/Google-OAuthLib-Django?logo=visual-studio-code)
+[![Python](https://img.shields.io/badge/Python-v3.9.1-yellowgreen?logo=python&logoColor=ffffff)](https://www.python.org/downloads/release/python-391/)
+[![Django](https://img.shields.io/badge/Django-v3.1.5-green?logo=django)](https://docs.djangoproject.com/en/3.1/releases/3.1.5/)
+[![Google API Python Client](https://img.shields.io/badge/API%20Client-v1.12.8-blue?logo=google&logoColor=81CAFA)](https://pypi.org/project/google-api-python-client/1.12.8/)
+[![Google Auth OAuthLib](https://img.shields.io/badge/Google%20Auth%20OAuthLib-v0.4.2-blue?logo=google&logoColor=81CAFA)](https://pypi.org/project/google-auth-oauthlib/0.4.2/)
+![GitHub](https://img.shields.io/github/license/amindeed/Google-OAuthLib-Django)
+
 
 <p align="center">
   <img src="/logos.png" alt="Google APIs + OAuth2 + OIDC + Django"/>
