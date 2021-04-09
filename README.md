@@ -1,11 +1,11 @@
 # Google OAuthLib Django
 
-![Lines of code](https://img.shields.io/tokei/lines/github/amindeed/Google-OAuthLib-Django?logo=visual-studio-code)
+[![Lines of code](https://img.shields.io/tokei/lines/github/amindeed/Google-OAuthLib-Django?logo=visual-studio-code)](/google_oauthlib_quickstart)
 [![Python](https://img.shields.io/badge/Python-v3.9.1-yellowgreen?logo=python&logoColor=ffffff)](https://www.python.org/downloads/release/python-391/)
-[![Django](https://img.shields.io/badge/Django-v3.1.5-green?logo=django)](https://docs.djangoproject.com/en/3.1/releases/3.1.5/)
+[![Django](https://img.shields.io/badge/Django-v3.1.7-green?logo=django)](https://docs.djangoproject.com/en/3.1/releases/3.1.7/)
 [![Google API Python Client](https://img.shields.io/badge/API%20Client-v1.12.8-blue?logo=google&logoColor=81CAFA)](https://pypi.org/project/google-api-python-client/1.12.8/)
 [![Google Auth OAuthLib](https://img.shields.io/badge/Google%20Auth%20OAuthLib-v0.4.2-blue?logo=google&logoColor=81CAFA)](https://pypi.org/project/google-auth-oauthlib/0.4.2/)
-![GitHub](https://img.shields.io/github/license/amindeed/Google-OAuthLib-Django)
+[![License](https://img.shields.io/github/license/amindeed/Google-OAuthLib-Django?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAYCAYAAAD3Va0xAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAABYlAAAWJQFJUiTwAAAAB3RJTUUH5QMcESAcS1MDzAAAAj1JREFUOMuVlDtoVFEQhr+zu0pik0C6YLQwIDaJjRY2aSyNj9ikkaC1QhAjFkI0YhWrgCJ2SnwgiqAiNhaiVnY+IqTQ+AoWSrLiIyZmPwvnLtc12dWBwz13Zs7MPzP/OYkQNdsWgFWx7wDGgATsB96F/htQSSmRP1SVMFwDnsWaAGaAT8CL0D0FzqeU8slJ2U8YdgI3gBFA4AnwCqgAnUAXsACcALamlO6p5JGh7lC/qhfUfvW5v2VGnY39hLpHPad+UbdX26KiXg/Hy+qB2I+rzblETZFEdUi9GvtbmUOz+lo9pvaFcXd+CPleqL3hs00dVstqIQs0pR5RJ9VxlpEsYJT2Mc7MZIHWRYZ98W2hgagd4Tsc366sP3fVjepsDafqoVpUe9RH6pUC0A5MAStjtP8qi0AJeAm0o3YHvH7rQfkTVWtueqo9BWASeANsAKbVk8uVl9MdBD4DLcAs8LAQDBb4EPdqSF1fewUyBqurgaPAcWA6zBXUknpH/a7uVS+pc+qA2lpTzoD6M4g7EOy+n89WDMOiOqYORu1z6nSsudAdVkfVSiQuEc9DHvYgMAr0Ak1AT0wnAUXgAVAGbgKHUkpn/rq0OXTZZZ1Xf6hn1dOBaCFsjxuNNUO4Kco8pb5V36sjUU5n3rcRa7sj+1q1JVZbBFqzFD2WeiGrvQOKKaVySqkcParaavtSakDiiloAVgTXlpVCHVsCtgDzManN9QLVQ1QELgYdEnCb/5V4o+bVvpxuV7C6bakzvwBluHvhBl+OCQAAAABJRU5ErkJggg==)](/LICENSE)
 
 
 <p align="center">
@@ -19,20 +19,21 @@ This is not intended as a replacement for Django's users sign up/in mechanism. [
 
 The App uses basic [Django Sessions](https://docs.djangoproject.com/en/3.1/topics/http/sessions/#using-sessions-in-views) to let users make authenticated requests that target their Google accounts resources. No user data is kept after logout.
 
-*Tested with `Python 3.9.1`, `Django 3.1.5`, `Google API Python Client 1.12.8` and `Google Auth OAuthLib 0.4.2`, as of February 26, 2021.*
+*Tested with `Python 3.9.1`, `Django 3.1.7`, `Google API Python Client 1.12.8` and `Google Auth OAuthLib 0.4.2`, as of February 26, 2021.*
 
 ## Table of Contents
 
 - [Features](#features)
 - [Background](#background)
   - [About AuthLib](#about-authlib)
-  - [Google AppsScript/Drive API Python Quickstart code adaptation:](#google-appsscriptdrive-api-python-quickstart-code-adaptation)
+  - [Google AppsScript/Drive API Python Quickstart code adaptation](#google-appsscriptdrive-api-python-quickstart-code-adaptation)
+  - [Online Resources](#online-resources)
 - [Setup](#setup)
   - [Install and configure requirements](#install-and-configure-requirements)
   - [Option 1: Cloning and running the code from this repository](#option-1-cloning-and-running-the-code-from-this-repository)
   - [Option 2: Update an existing Django project/app](#option-2-update-an-existing-django-projectapp)
-    - _[Add files:](#-add-files)_
-    - _[Modify files:](#-modify-files)_
+    - _[Add files](#-add-files)_
+    - _[Modify files](#-modify-files)_
 - [License](#license)
 
 
@@ -73,7 +74,7 @@ The structure of the code was built upon the [AuthLib library demo for Django](h
 
 - `credentials.json` contains [OAuth client ID credentials](https://developers.google.com/identity/protocols/oauth2/web-server#creatingcred) of the GCP project, that will provide access to Google user's resources for the Django app.
 - [`Flow`](https://google-auth-oauthlib.readthedocs.io/en/latest/reference/google_auth_oauthlib.flow.html#google_auth_oauthlib.flow.Flow) class was used instead of [`InstalledAppFlow`](https://google-auth-oauthlib.readthedocs.io/en/latest/reference/google_auth_oauthlib.flow.html#google_auth_oauthlib.flow.InstalledAppFlow).
-- Instead of using pickles, OAuth2 token (a [`Credentials`](https://google-auth.readthedocs.io/en/stable/reference/google.oauth2.credentials.html#google.oauth2.credentials.Credentials) instance) is converted to a dictionary and saved to the session (as a session key named `token`):
+- Instead of [pickles](https://github.com/googleworkspace/python-samples/blob/aacc00657392a7119808b989167130b664be5c27/apps_script/quickstart/quickstart.py#L65), [JSON Serialization](#tojson) of Credentials is used: OAuth2 token (a [`Credentials`](https://google-auth.readthedocs.io/en/stable/reference/google.oauth2.credentials.html#google.oauth2.credentials.Credentials) instance) is converted to a dictionary and saved to the session (as a session key named `token`):
 
     ```
     {
@@ -114,12 +115,28 @@ The structure of the code was built upon the [AuthLib library demo for Django](h
     }
     ```
 
-- **Key online resources:**
-    - [`Flow.fetch_token(code=code)`](https://google-auth-oauthlib.readthedocs.io/en/latest/reference/google_auth_oauthlib.flow.html#google_auth_oauthlib.flow.Flow.fetch_token) method of the [`google_auth_oauthlib.flow.Flow` class](https://google-auth-oauthlib.readthedocs.io/en/latest/reference/google_auth_oauthlib.flow.html) (`google-auth-oauthlib 0.4.1` documentation).
-    - [`Flow.credentials`](https://google-auth-oauthlib.readthedocs.io/en/latest/reference/google_auth_oauthlib.flow.html#google_auth_oauthlib.flow.Flow.credentials) constructs a [`google.oauth2.credentials.Credentials`](https://google-auth.readthedocs.io/en/stable/reference/google.oauth2.credentials.html#google.oauth2.credentials.Credentials) class, which in turn is a child class of [`google.auth.credentials.Credentials`](https://google-auth.readthedocs.io/en/stable/reference/google.auth.credentials.html#google.auth.credentials.Credentials)
-    - Key [`google.auth.credentials.Credentials`](https://google-auth.readthedocs.io/en/stable/reference/google.auth.credentials.html#google.auth.credentials.Credentials) members, that are inherited by the [`google_auth_oauthlib.flow.Flow.credentials`](https://google-auth-oauthlib.readthedocs.io/en/latest/reference/google_auth_oauthlib.flow.html#google_auth_oauthlib.flow.Flow.credentials) class:
-        - [`to_json()`](https://google-auth.readthedocs.io/en/stable/reference/google.oauth2.credentials.html#google.oauth2.credentials.Credentials.to_json): Returns A JSON representation of this instance. When converted into a dictionary, it can be passed to [`from_authorized_user_info()`](https://google-auth.readthedocs.io/en/stable/reference/google.oauth2.credentials.html#google.oauth2.credentials.Credentials.from_authorized_user_info) to create a new Credentials instance.
-        - [`id_token`](https://google-auth.readthedocs.io/en/stable/reference/google.oauth2.credentials.html#google.oauth2.credentials.Credentials.id_token): can be verified and decoded (parsed) using [`google.oauth2.id_token.verify_oauth2_token()`](https://google-auth.readthedocs.io/en/stable/reference/google.oauth2.id_token.html#google.oauth2.id_token.verify_oauth2_token)
+### Online Resources:
+
+- [`Flow.fetch_token(code=code)`](https://google-auth-oauthlib.readthedocs.io/en/latest/reference/google_auth_oauthlib.flow.html#google_auth_oauthlib.flow.Flow.fetch_token) method of the [`google_auth_oauthlib.flow.Flow` class](https://google-auth-oauthlib.readthedocs.io/en/latest/reference/google_auth_oauthlib.flow.html) (`google-auth-oauthlib 0.4.1` documentation).
+- [`Flow.credentials`](https://google-auth-oauthlib.readthedocs.io/en/latest/reference/google_auth_oauthlib.flow.html#google_auth_oauthlib.flow.Flow.credentials) constructs a [`google.oauth2.credentials.Credentials`](https://google-auth.readthedocs.io/en/stable/reference/google.oauth2.credentials.html#google.oauth2.credentials.Credentials) class, which in turn is a child class of [`google.auth.credentials.Credentials`](https://google-auth.readthedocs.io/en/stable/reference/google.auth.credentials.html#google.auth.credentials.Credentials)
+- Key [`google.auth.credentials.Credentials`](https://google-auth.readthedocs.io/en/stable/reference/google.auth.credentials.html#google.auth.credentials.Credentials) members, that are inherited by the [`google_auth_oauthlib.flow.Flow.credentials`](https://google-auth-oauthlib.readthedocs.io/en/latest/reference/google_auth_oauthlib.flow.html#google_auth_oauthlib.flow.Flow.credentials) class:
+    - <a name="tojson"></a>[`to_json()`](https://google-auth.readthedocs.io/en/stable/reference/google.oauth2.credentials.html#google.oauth2.credentials.Credentials.to_json): Returns A JSON representation of this instance. When converted into a dictionary, it can be passed to [`from_authorized_user_info()`](https://google-auth.readthedocs.io/en/stable/reference/google.oauth2.credentials.html#google.oauth2.credentials.Credentials.from_authorized_user_info) to create a new Credentials instance.
+    - [`id_token`](https://google-auth.readthedocs.io/en/stable/reference/google.oauth2.credentials.html#google.oauth2.credentials.Credentials.id_token): can be verified and decoded (parsed) using [`google.oauth2.id_token.verify_oauth2_token()`](https://google-auth.readthedocs.io/en/stable/reference/google.oauth2.id_token.html#google.oauth2.id_token.verify_oauth2_token)
+    
+- **Featured Google OAuth implementations and libraries:**
+    - 📦 **`oauth2client`** ([googleapis/oauth2client](https://github.com/googleapis/oauth2client)):   ***deprecated*** in favor of **`google-auth`**.<br>
+           `💻 $ pip install --upgrade oauth2client`<br>
+           `🐍 from oauth2client.client import GoogleCredentials`
+    - 📦 **`google-auth`** ([googleapis/google-auth-library-python](https://github.com/googleapis/google-auth-library-python)): provides the ability to authenticate to Google APIs using various methods. It contains two sub-packages: [`google.auth`](https://googleapis.dev/python/google-auth/latest/reference/google.auth.html) and [`google.oauth2`](https://googleapis.dev/python/google-auth/latest/reference/google.oauth2.html)<br>
+           `💻 $ pip install google-auth`<br>
+           `🐍 from google.auth.transport.requests import Request`<br>
+           `🐍 from google.oauth2.credentials import Credentials`
+    - 📦 **`OAuthLib`** ([oauthlib/oauthlib](https://github.com/oauthlib/oauthlib)): a Python framework which implements the logic of OAuth1 or OAuth2 without assuming a specific HTTP request object or web framework.<br>
+           `💻 $ pip install oauthlib`<br>
+           `🐍 from oauthlib.oauth2 import WebApplicationClient`
+    - 📦 **`google-auth-oauthlib`** ([googleapis/google-auth-library-python-oauthlib](https://github.com/googleapis/google-auth-library-python-oauthlib)): used for this project. It contains experimental **`OAuthLib`** integration with **`google-auth`**.<br>
+           `💻 $ pip install google-auth-oauthlib`<br>
+           `🐍 from google_auth_oauthlib.flow import Flow`
 
 
 ## Setup
@@ -131,10 +148,10 @@ _Tested and run on Windows 10 x64._
 - Create a GCP project, enable Drive API, add the following scopes and then download webapp Client ID credentials file from the GCP console:
 
     ```
-    'https://www.googleapis.com/auth/drive', \
-    'https://www.googleapis.com/auth/userinfo.email', \
-    'https://www.googleapis.com/auth/userinfo.profile', \
-    'openid'
+    https://www.googleapis.com/auth/drive
+    https://www.googleapis.com/auth/userinfo.email
+    https://www.googleapis.com/auth/userinfo.profile
+    openid
     ```
 
 - Create a virtual environment and install required libraries:
