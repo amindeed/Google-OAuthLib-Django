@@ -2,9 +2,9 @@
 
 [![Lines of code](https://img.shields.io/tokei/lines/github/amindeed/Google-OAuthLib-Django?logo=visual-studio-code)](/google_oauthlib_quickstart)
 [![Python](https://img.shields.io/badge/Python-v3.9.1-yellowgreen?logo=python&logoColor=ffffff)](https://www.python.org/downloads/release/python-391/)
-[![Django](https://img.shields.io/badge/Django-v3.1.8-green?logo=django)](https://docs.djangoproject.com/en/3.1/releases/3.1.8/)
-[![Google API Python Client](https://img.shields.io/badge/API%20Client-v1.12.8-blue?logo=google&logoColor=81CAFA)](https://pypi.org/project/google-api-python-client/1.12.8/)
-[![Google Auth OAuthLib](https://img.shields.io/badge/Google%20Auth%20OAuthLib-v0.4.2-blue?logo=google&logoColor=81CAFA)](https://pypi.org/project/google-auth-oauthlib/0.4.2/)
+[![Django](https://img.shields.io/badge/Django-v3.2-green?logo=django)](https://docs.djangoproject.com/en/3.2/releases/3.2/)
+[![Google API Python Client](https://img.shields.io/badge/API%20Client-v2.1.0-blue?logo=google&logoColor=81CAFA)](https://pypi.org/project/google-api-python-client/2.1.0/)
+[![Google Auth OAuthLib](https://img.shields.io/badge/Google%20Auth%20OAuthLib-v0.4.4-blue?logo=google&logoColor=81CAFA)](https://pypi.org/project/google-auth-oauthlib/0.4.4/)
 [![License](https://img.shields.io/github/license/amindeed/Google-OAuthLib-Django?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAYCAYAAAD3Va0xAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAABYlAAAWJQFJUiTwAAAAB3RJTUUH5QMcESAcS1MDzAAAAj1JREFUOMuVlDtoVFEQhr+zu0pik0C6YLQwIDaJjRY2aSyNj9ikkaC1QhAjFkI0YhWrgCJ2SnwgiqAiNhaiVnY+IqTQ+AoWSrLiIyZmPwvnLtc12dWBwz13Zs7MPzP/OYkQNdsWgFWx7wDGgATsB96F/htQSSmRP1SVMFwDnsWaAGaAT8CL0D0FzqeU8slJ2U8YdgI3gBFA4AnwCqgAnUAXsACcALamlO6p5JGh7lC/qhfUfvW5v2VGnY39hLpHPad+UbdX26KiXg/Hy+qB2I+rzblETZFEdUi9GvtbmUOz+lo9pvaFcXd+CPleqL3hs00dVstqIQs0pR5RJ9VxlpEsYJT2Mc7MZIHWRYZ98W2hgagd4Tsc366sP3fVjepsDafqoVpUe9RH6pUC0A5MAStjtP8qi0AJeAm0o3YHvH7rQfkTVWtueqo9BWASeANsAKbVk8uVl9MdBD4DLcAs8LAQDBb4EPdqSF1fewUyBqurgaPAcWA6zBXUknpH/a7uVS+pc+qA2lpTzoD6M4g7EOy+n89WDMOiOqYORu1z6nSsudAdVkfVSiQuEc9DHvYgMAr0Ak1AT0wnAUXgAVAGbgKHUkpn/rq0OXTZZZ1Xf6hn1dOBaCFsjxuNNUO4Kco8pb5V36sjUU5n3rcRa7sj+1q1JVZbBFqzFD2WeiGrvQOKKaVySqkcParaavtSakDiiloAVgTXlpVCHVsCtgDzManN9QLVQ1QELgYdEnCb/5V4o+bVvpxuV7C6bakzvwBluHvhBl+OCQAAAABJRU5ErkJggg==)](/LICENSE)
 
 
@@ -84,9 +84,10 @@ The code was tested in the following environments (all OSs are x64):
     source venv/Scripts/activate
     pip install Django google-api-python-client google-auth-oauthlib
     ## OR: 'pip install -r requirements.txt'
+    ## You might also need to install 'pysqlite3-binary' (check note below)
     ```
 
-- <a name="sqlitev"></a> Since [Django 2.2](https://docs.djangoproject.com/en/2.2/releases/2.2/#django-2-2-release-notes), the minimum supported version of **SQLite** is **3.8.3**. So if your system does not meet this requirement (like ***CentOS 7***), you can either make a system-wide upgrade of the SQLite3 package, or (*[better](https://github.com/amindeed/Gmail-AutoResponder/blob/master/worklog.md#centos7-sqlite3v)*) install [`pysqlite3-binary`](https://pypi.org/project/pysqlite3-binary/) in your Python virtual environment and override the sqlite3 module by prepending the following lines to [`settings.py`](google_oauthlib_quickstart/settings.py):
+- <a name="sqlitev"></a> Since [Django 2.2](https://docs.djangoproject.com/en/2.2/releases/2.2/#django-2-2-release-notes), the minimum supported version of **SQLite** is **3.8.3**. So if your system does not meet this requirement (like ***CentOS 7***), you can either make a system-wide upgrade of the SQLite3 package, or (*[better](https://github.com/amindeed/Gmail-AutoResponder/blob/e188598a22eee0ca41d9219c42aeaa7d2d9a579b/worklog.md#centos7-sqlite3v)*) install [`pysqlite3-binary`](https://pypi.org/project/pysqlite3-binary/) in your Python virtual environment and override the sqlite3 module by prepending the following lines to [`settings.py`](google_oauthlib_quickstart/settings.py):
 
     ```python
     __import__('pysqlite3')
