@@ -1,3 +1,10 @@
+## Uncomment the following 3 lines if you have installed
+## the latest version of 'pysqlite3-binary', to meet
+## Django's 2.2+ minimum SQLite3 version (>=3.8.3) requirement.
+#__import__('pysqlite3')
+#import sys
+#sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
+
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.

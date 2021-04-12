@@ -57,12 +57,13 @@ The App uses basic [Django Sessions](https://docs.djangoproject.com/en/3.1/topic
 
 The code was tested in the following environments (all OSs are x64):
 
-|                                | Windows 10                   | CentOS 7 | CentOS 8 Stream | Ubuntu 16.04 | Ubuntu 18.04 | Ubuntu 20.04 |
-|--------------------------------|------------------------------|----------|-----------------|--------------|--------------|--------------|
-| **`Python`**                   | `3.9.1`                      |    -     |       -         |      -       |      -       |      -       |
-| **`Django`**                   | ***`3.2`*** - <br>`3.1.8`    |    -     |       -         |      -       |      -       |      -       |
-| **`Google API Python Client`** | ***`2.1.0`*** - <br>`1.12.8` |    -     |       -         |      -       |      -       |      -       |
-| **`Google Auth OAuthLib`**     | ***`0.4.4`*** - <br>`0.4.2`  |    -     |       -         |      -       |      -       |      -       |
+|                                | Windows 10                   | CentOS 7  | CentOS 8 Stream | Ubuntu 16.04 | Ubuntu 18.04 | Ubuntu 20.04 |
+|--------------------------------|------------------------------|-----------|-----------------|--------------|--------------|--------------|
+| **`Python`**                   | `3.9.1`                      |    `3.6.8`     |       -         |      -       |      -       |      -       |
+| **`Django`**                   | ***`3.2`*** - <br>`3.1.8`    |    `3.2`<sup>[[*]](#sqlitev)</sup>     |       -         |      -       |      -       |      -       |
+| **`Google API Python Client`** | ***`2.1.0`*** - <br>`1.12.8` |    `2.1.0`     |       -         |      -       |      -       |      -       |
+| **`Google Auth OAuthLib`**     | ***`0.4.4`*** - <br>`0.4.2`  |    `0.4.4`     |       -         |      -       |      -       |      -       |
+
 
 ## Setup
 ### Install and configure requirements
@@ -83,6 +84,14 @@ The code was tested in the following environments (all OSs are x64):
     source venv/Scripts/activate
     pip install Django google-api-python-client google-auth-oauthlib
     ## OR: 'pip install -r requirements.txt'
+    ```
+
+- <a name="sqlitev"></a> Since [Django 2.2](https://docs.djangoproject.com/en/2.2/releases/2.2/#django-2-2-release-notes), the minimum supported version of **SQLite** is **3.8.3**. So if your system does not meet this requirement (like ***CentOS 7***), you can either make a system-wide upgrade of the SQLite3 package, or (*[better](https://github.com/amindeed/Gmail-AutoResponder/blob/master/worklog.md#centos7-sqlite3v)*) install [`pysqlite3-binary`](https://pypi.org/project/pysqlite3-binary/) in your Python virtual environment and override the sqlite3 module by prepending the following lines to [`settings.py`](google_oauthlib_quickstart/settings.py):
+
+    ```python
+    __import__('pysqlite3')
+    import sys
+    sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
     ```
 
 ### Option 1: Cloning and running the code from this repository
