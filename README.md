@@ -1,15 +1,15 @@
 # Google OAuthLib Django
 
-[![Lines of code](https://img.shields.io/tokei/lines/github/amindeed/Google-OAuthLib-Django?logo=visual-studio-code)](/google_oauthlib_quickstart)
+[![Lines of code](https://img.shields.io/tokei/lines/github/amindeed/Google-OAuthLib-Django?logo=visual-studio-code)](google_oauthlib_quickstart)
 [![Python](https://img.shields.io/badge/Python-v3.9.1-yellowgreen?logo=python&logoColor=ffffff)](https://www.python.org/downloads/release/python-391/)
 [![Django](https://img.shields.io/badge/Django-v3.2-green?logo=django)](https://docs.djangoproject.com/en/3.2/releases/3.2/)
 [![Google API Python Client](https://img.shields.io/badge/API%20Client-v2.1.0-blue?logo=google&logoColor=81CAFA)](https://pypi.org/project/google-api-python-client/2.1.0/)
 [![Google Auth OAuthLib](https://img.shields.io/badge/Google%20Auth%20OAuthLib-v0.4.4-blue?logo=google&logoColor=81CAFA)](https://pypi.org/project/google-auth-oauthlib/0.4.4/)
-[![License](https://img.shields.io/github/license/amindeed/Google-OAuthLib-Django?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAYCAYAAAD3Va0xAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAABYlAAAWJQFJUiTwAAAAB3RJTUUH5QMcESAcS1MDzAAAAj1JREFUOMuVlDtoVFEQhr+zu0pik0C6YLQwIDaJjRY2aSyNj9ikkaC1QhAjFkI0YhWrgCJ2SnwgiqAiNhaiVnY+IqTQ+AoWSrLiIyZmPwvnLtc12dWBwz13Zs7MPzP/OYkQNdsWgFWx7wDGgATsB96F/htQSSmRP1SVMFwDnsWaAGaAT8CL0D0FzqeU8slJ2U8YdgI3gBFA4AnwCqgAnUAXsACcALamlO6p5JGh7lC/qhfUfvW5v2VGnY39hLpHPad+UbdX26KiXg/Hy+qB2I+rzblETZFEdUi9GvtbmUOz+lo9pvaFcXd+CPleqL3hs00dVstqIQs0pR5RJ9VxlpEsYJT2Mc7MZIHWRYZ98W2hgagd4Tsc366sP3fVjepsDafqoVpUe9RH6pUC0A5MAStjtP8qi0AJeAm0o3YHvH7rQfkTVWtueqo9BWASeANsAKbVk8uVl9MdBD4DLcAs8LAQDBb4EPdqSF1fewUyBqurgaPAcWA6zBXUknpH/a7uVS+pc+qA2lpTzoD6M4g7EOy+n89WDMOiOqYORu1z6nSsudAdVkfVSiQuEc9DHvYgMAr0Ak1AT0wnAUXgAVAGbgKHUkpn/rq0OXTZZZ1Xf6hn1dOBaCFsjxuNNUO4Kco8pb5V36sjUU5n3rcRa7sj+1q1JVZbBFqzFD2WeiGrvQOKKaVySqkcParaavtSakDiiloAVgTXlpVCHVsCtgDzManN9QLVQ1QELgYdEnCb/5V4o+bVvpxuV7C6bakzvwBluHvhBl+OCQAAAABJRU5ErkJggg==)](/LICENSE)
+[![License](https://img.shields.io/github/license/amindeed/Google-OAuthLib-Django?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAYCAYAAAD3Va0xAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAABYlAAAWJQFJUiTwAAAAB3RJTUUH5QMcESAcS1MDzAAAAj1JREFUOMuVlDtoVFEQhr+zu0pik0C6YLQwIDaJjRY2aSyNj9ikkaC1QhAjFkI0YhWrgCJ2SnwgiqAiNhaiVnY+IqTQ+AoWSrLiIyZmPwvnLtc12dWBwz13Zs7MPzP/OYkQNdsWgFWx7wDGgATsB96F/htQSSmRP1SVMFwDnsWaAGaAT8CL0D0FzqeU8slJ2U8YdgI3gBFA4AnwCqgAnUAXsACcALamlO6p5JGh7lC/qhfUfvW5v2VGnY39hLpHPad+UbdX26KiXg/Hy+qB2I+rzblETZFEdUi9GvtbmUOz+lo9pvaFcXd+CPleqL3hs00dVstqIQs0pR5RJ9VxlpEsYJT2Mc7MZIHWRYZ98W2hgagd4Tsc366sP3fVjepsDafqoVpUe9RH6pUC0A5MAStjtP8qi0AJeAm0o3YHvH7rQfkTVWtueqo9BWASeANsAKbVk8uVl9MdBD4DLcAs8LAQDBb4EPdqSF1fewUyBqurgaPAcWA6zBXUknpH/a7uVS+pc+qA2lpTzoD6M4g7EOy+n89WDMOiOqYORu1z6nSsudAdVkfVSiQuEc9DHvYgMAr0Ak1AT0wnAUXgAVAGbgKHUkpn/rq0OXTZZZ1Xf6hn1dOBaCFsjxuNNUO4Kco8pb5V36sjUU5n3rcRa7sj+1q1JVZbBFqzFD2WeiGrvQOKKaVySqkcParaavtSakDiiloAVgTXlpVCHVsCtgDzManN9QLVQ1QELgYdEnCb/5V4o+bVvpxuV7C6bakzvwBluHvhBl+OCQAAAABJRU5ErkJggg==)](LICENSE)
 
 
 <p align="center">
-  <img src="/logos.png" alt="Google APIs + OAuth2 + OIDC + Django"/>
+  <img src="logos.png" alt="Google APIs + OAuth2 + OIDC + Django"/>
 </p>
 
 
@@ -37,7 +37,7 @@ The App uses basic [Django Sessions](https://docs.djangoproject.com/en/3.1/topic
 
 
 <p align="center">
-  <img src="/google-oauthlib-django.gif" alt="google-oauthlib-django.gif" width="500"/>
+  <img src="google-oauthlib-django.gif" alt="google-oauthlib-django.gif" width="500"/>
 </p>
 
 
@@ -59,10 +59,10 @@ The code was tested in the following environments (all OSs are x64):
 
 |                                | Windows 10                   | CentOS 7  | CentOS 8 Stream | Ubuntu 16.04 | Ubuntu 18.04 | Ubuntu 20.04 |
 |--------------------------------|------------------------------|-----------|-----------------|--------------|--------------|--------------|
-| **`Python`**                   | `3.9.1`                      |    `3.6.8`     |       -         |      -       |      -       |      -       |
-| **`Django`**                   | ***`3.2`*** - <br>`3.1.8`    |    `3.2`<sup>[[*]](#sqlitev)</sup>     |       -         |      -       |      -       |      -       |
-| **`Google API Python Client`** | ***`2.1.0`*** - <br>`1.12.8` |    `2.1.0`     |       -         |      -       |      -       |      -       |
-| **`Google Auth OAuthLib`**     | ***`0.4.4`*** - <br>`0.4.2`  |    `0.4.4`     |       -         |      -       |      -       |      -       |
+| **`Python`**                   | `3.9.1`                      |    `3.6.8`     |    `3.9.2`     |      -       |      -       |      -       |
+| **`Django`**                   | ***`3.2`*** - <br>`3.1.8`    |    `3.2`<sup>[[*]](#sqlitev)</sup>     |    `3.2`      |      -       |      -       |      -       |
+| **`Google API Python Client`** | ***`2.1.0`*** - <br>`1.12.8` |    `2.1.0`     |    `2.2.0`     |      -       |      -       |      -       |
+| **`Google Auth OAuthLib`**     | ***`0.4.4`*** - <br>`0.4.2`  |    `0.4.4`     |    `0.4.4`      |      -       |      -       |      -       |
 
 
 ## Setup
@@ -114,8 +114,8 @@ Diffing changes between the code in this repository and a newly created Django p
 #### ➕ Add files:
 
 - **`credentials.json`** (GCP project Client ID credentials)
-- **`my_django_app/templates/home.html`** ( [`templates/home.html`](/google_oauthlib_quickstart/templates/home.html) sample base template)
-- **`my_django_app/views.py`** ([`views.py`](/google_oauthlib_quickstart/views.py))
+- **`my_django_app/templates/home.html`** ( [`templates/home.html`](google_oauthlib_quickstart/templates/home.html) sample base template)
+- **`my_django_app/views.py`** ([`views.py`](google_oauthlib_quickstart/views.py))
 - **`db.sqlite3`** (automatically created by Django by running `python manage.py migrate`)
 
 #### ✎ Modify files:
