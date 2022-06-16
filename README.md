@@ -17,7 +17,7 @@
 
 This is not intended as a replacement for Django's users sign up/in mechanism. [Django AllAuth](https://github.com/pennersr/django-allauth) is more suited for such use case. 
 
-The App uses basic [Django Sessions](https://docs.djangoproject.com/en/3.1/topics/http/sessions/#using-sessions-in-views) to let users make authenticated requests that target their Google accounts resources. No user data is kept after logout.
+The App uses basic [Django Sessions](https://docs.djangoproject.com/en/3.1/topics/http/sessions/#using-sessions-in-views) to let users make authenticated requests that target their Google accounts’ resources. No user data is kept after logout.
 
 ## Table of Contents
 
@@ -47,7 +47,7 @@ The App uses basic [Django Sessions](https://docs.djangoproject.com/en/3.1/topic
 - Supporting two mechanisms:
     - Using a Google service API client library, [via](https://googleapis.github.io/google-api-python-client/docs/epy/googleapiclient.discovery-module.html#build) the Google API [Discovery](https://developers.google.com/discovery) resource constructor (`googleapiclient.discovery.build`).
     - Sending plain HTTP requests to a Google service API's endpoint, using a Bearer authentication scheme.
-- Identifying users by parsing OIDC tokens.
+- Identifying users by parsing Open ID Connect (OIDC) ID tokens.
 - Handling backend errors, warnings and infos, and storing their respective messages to the session key `messages`, which is added as a variable to template's context, and then rendered on the frontend.
 - Handling access to some special paths like `/login` and `/auth`.
 - `@require_auth` decorator for views.
