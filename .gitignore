@@ -3,3 +3,4 @@ db.sqlite3
 venv/
 lab/
 google_oauthlib_quickstart/__pycache__
+nonexisting
